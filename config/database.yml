@@ -79,6 +79,10 @@ test:
 #
 production:
   <<: *default
-  database: hempay_api_production
-  username: hempay_api
-  password: <%= ENV["HEMPAY_API_DATABASE_PASSWORD"] %>
+  url: postgres://hempay_user:24VcipZmJZQpLE5J0UBc8NKZ8NjGPNzp@dpg-cne86iud3nmc738o5no0-a/hempay
+  database: hempay
+  username: hempay_user
+  password: 24VcipZmJZQpLE5J0UBc8NKZ8NjGPNzp
+  host: dpg-cne86iud3nmc738o5no0-a
+  port: 5432
+
