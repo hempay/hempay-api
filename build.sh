@@ -11,6 +11,4 @@ bundle install
 
 rails db:migrate RAILS_ENV=production
 
-rails db:seed
-
 # rails server -e production
