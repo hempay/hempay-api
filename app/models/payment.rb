@@ -1,6 +1,6 @@
 class Payment < ApplicationRecord
   belongs_to :source, polymorphic: true
-  
+
   belongs_to :currency
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
@@ -14,7 +14,7 @@ class Payment < ApplicationRecord
   validates :sender, presence: true
   validates :receiver, presence: true
   validates :amount, numericality: { greater_than: 0 }
-  validates :status, inclusion: { in: %w(pending completed failed) }
+  validates :status, inclusion: { in: %w[pending completed failed] }
   validates :currency_code, inclusion: { in: proc { Currency.pluck(:code) } }
   validate :sender_can_transact
   validate :receiver_can_transact
@@ -28,7 +28,7 @@ class Payment < ApplicationRecord
 
   def process_payment
     raise StandardError, errors.full_messages.join(', ') unless valid?
-  
+
     Payment.transaction do
       case status
       when 'pending'
@@ -66,7 +66,7 @@ class Payment < ApplicationRecord
   def sender_has_enough_balance
     errors
       .add(:sender, 'does not have enough balance')
-      .unless(sender&.balance >= amount)
+      .unless(sender&.balance&.>= amount)
   end
 
   def self.pending
@@ -86,7 +86,7 @@ class Payment < ApplicationRecord
   end
 
   def self.total_amount_in_currency(currency_code)
-    where(currency_code: currency_code).sum(:amount)
+    where(currency_code:).sum(:amount)
   end
 
   def self.total_amount_in_ngn
