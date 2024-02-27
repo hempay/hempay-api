@@ -79,11 +79,9 @@ test:
 #
 production:
   <<: *default
-  secret_key_base: 7e97960abe1f8e3c76afa7b8e887d37928c2ac054f0d1e9fd81cd843a160003ade77308a7607a2b8f78c516b647d1b9d09fb2de10c5a919b75fa3fdcd4812e23
-  url: postgres://hempay_user:24VcipZmJZQpLE5J0UBc8NKZ8NjGPNzp@dpg-cne86iud3nmc738o5no0-a/hempay
-  database: hempay
-  username: hempay_user
-  password: 24VcipZmJZQpLE5J0UBc8NKZ8NjGPNzp
-  host: dpg-cne86iud3nmc738o5no0-a
+  url: <%= ENV["DB_URL"] %>
+  database: <%= ENV["DB_NAME"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASS"] %>
+  host: <%= ENV["DB_HOST"] %>
   port: 5432
-
