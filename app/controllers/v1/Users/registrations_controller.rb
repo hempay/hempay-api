@@ -5,19 +5,41 @@ class V1::Users::RegistrationsController < Devise::RegistrationsController
 
   respond_to :json
 
+  def update_kyc_status
+    # Authorization logic goes here
+    if current_user.bank_staff?
+      # Update KYC status logic goes here
+      render json: { message: 'KYC status updated successfully' }, status: :ok
+    else
+      render json: { error: 'Unauthorized', message: 'You are not authorized to perform this action' },
+             status: :unauthorized
+    end
+  end
+
+  def update_can_transact
+    # Authorization logic goes here
+    if current_user.bank_staff?
+      # Update can_transact status logic goes here
+      render json: { message: 'Can transact status updated successfully' }, status: :ok
+    else
+      render json: { error: 'Unauthorized', message: 'You are not authorized to perform this action' },
+             status: :unauthorized
+    end
+  end
+
   protected
 
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: %i[username first_name last_name date_of_birth employment_status bvn
-                                               home_address office_address phone_number])
+                                               home_address office_address phone_number email avatar])
   end
 
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update,
                                       keys: %i[first_name last_name date_of_birth employment_status bvn
                                                kyc_status home_address
-                                               office_address phone_number can_transact])
+                                               office_address phone_number can_transact email avatar])
   end
 
   def respond_with(resource, _opts = {})

@@ -3,7 +3,9 @@ class V1::PostsController < ApplicationController
     instructions = {
       message: 'Welcome to Hempay.',
       instructions: [
-        "To create a user account, send a POST request to 'v1/users' with the following parameters (all fields should be strings except 'employment_status', which should be boolean):",
+        "To create a user account, send a POST request to 'v1/users' with the
+        following parameters (all fields should be strings except 'employment_status',
+        which should be boolean):",
         '- username',
         '- first_name',
         '- last_name',
