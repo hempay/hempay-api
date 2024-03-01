@@ -27,8 +27,6 @@ class User < ApplicationRecord
     errors.add(:date_of_birth, 'must be in the format mm-dd-yyyy')
   end
 
-  private
-
   def trim_string_attributes
     attributes.each do |attr, value|
       self[attr] = value.strip if value.respond_to?(:strip)
