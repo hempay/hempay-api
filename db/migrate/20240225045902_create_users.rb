@@ -13,10 +13,11 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :home_address
       t.string :office_address
       t.string :phone_number
-      t.boolean :can_transact
 
       t.timestamps
     end
+    
+    add_index :users, :phone_number, unique: true
     add_index :users, :username, unique: true
   end
 end
