@@ -9,10 +9,13 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.date :date_of_birth
       t.string :employment_status
       t.string :bvn
+      t.boolean :bvn_status
+      t.boolean :can_transact
       t.boolean :kyc_status
       t.string :home_address
       t.string :office_address
       t.string :phone_number
+      t.string :recent_location
 
       t.timestamps
     end
